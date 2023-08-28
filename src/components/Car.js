@@ -1,13 +1,21 @@
 import React from 'react'
-import cars from '../cars.json'
-// Import {useParams} from "react-router-dom" here //
-
-// import MUI components here //
-// Container, Paper, Chip //
+import { Container, Paper, Chip } from '@mui/material';
 
 const Car = (props) => {
+    const id = props.match.params.id
+    const car = props.cars.find(c => c.id === id)
+
     return (
-        <h1>A specific car</h1>
+        <Container maxWidth="sm" className="car-container">
+            <Paper className="car-paper">
+                <h2>{car.name}</h2>
+                {
+                    Object.keys(car).map((key, idx) => {
+                        return <Chip label={`${key}: ${car[key]}`}></Chip>
+                    })
+                }
+            </Paper>
+        </Container>
     )
 }
 
